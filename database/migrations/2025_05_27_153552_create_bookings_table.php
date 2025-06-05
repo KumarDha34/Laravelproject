@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 return new class extends Migration
 {
@@ -16,13 +17,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('mobile');
-            $table->date('date');
+            $table->date('date'); 
             $table->time('time');
-            $table->integer('guest');
-            $table->boolean('status')->default(1);
+            $table->integer('guest'); 
+            $table->boolean('status');
             $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->softDeletes();
+
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 return new class extends Migration
 {
@@ -13,14 +14,17 @@ return new class extends Migration
     {
         Schema::create('social_media_types', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
-            $table->string('icon');
-            $table->string('title');
-            $table->boolean('status')->default(1);
+            $table->string("url");
+            $table->string("icon");
+            $table->string("title");
+            $table->boolean("status");
             $table->softDeletes();
+            $table->unsignedBigInteger("created_by");
+            $table->unsignedInteger("updated_by")->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

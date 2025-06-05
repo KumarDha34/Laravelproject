@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 return new class extends Migration
 {
@@ -12,11 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            //
             $table->string('phone')->nullable();
-            $table->text('address')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->string('address')->nullable();
+            $table->boolean('status')->default(0);
         });
     }
 
@@ -26,7 +26,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['phone', 'address', 'status', 'created_by', 'updated_by']);
+            //
+            $table->dropColumn('phone');
+            $table->dropColumn('address');
+            $table->dropColumn('status');
         });
     }
 };

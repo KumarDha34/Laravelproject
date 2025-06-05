@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 return new class extends Migration
 {
@@ -14,24 +15,25 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('website_title');
-            $table->string('slogan')->nullable();
+            $table->text('slogan')->nullable();
             $table->string('logo_top');
             $table->string('logo_bottom')->nullable();
             $table->string('favicon')->nullable();
-            $table->text('address');
+            $table->string('address');
             $table->string('phone');
             $table->string('email');
             $table->string('facebook');
             $table->string('twitter');
             $table->string('youtube');
-            $table->string('instagram');
             $table->string('linkedin');
-            $table->text('google_map');
-            $table->boolean('status')->default(1);
-            $table->softDeletes();
+            $table->string('instagram');
+            $table->text('google_map'); 
             $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
