@@ -174,13 +174,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('backend.category.create')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Create</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('backend.category.index') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>List</p>
                     </a>
